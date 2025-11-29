@@ -12,8 +12,8 @@ public class Ghost {
     public Ghost() {
         x = 100;
         y = 200;
-        width = MathUtils.random(100,200);
-        height = MathUtils.random(100,300);
+        width = MathUtils.random(50,300);
+        height = width*1.5f;
         stepX = MathUtils.random(-5f, 5f);
         stepY = MathUtils.random(-5f, 5f);
     }
@@ -46,6 +46,14 @@ public class Ghost {
         }
         if (y < -height) {
             y = screenHeight;
+        }
+    }
+
+    void hit(float tx, float ty){
+        if(x < tx && tx < x+width && y < ty && ty < y+height){
+            x = -10000;
+            stepX = 0;
+            stepY = 0;
         }
     }
 }
