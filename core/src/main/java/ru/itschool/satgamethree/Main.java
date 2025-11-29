@@ -16,7 +16,7 @@ public class Main extends ApplicationAdapter {
     Vector3 touch;
 
     Texture image;
-    Ghost[] ghost = new Ghost[55];
+    Ghost[] ghost = new Ghost[33];
 
     @Override
     public void create() {
