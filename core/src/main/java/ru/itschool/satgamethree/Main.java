@@ -2,6 +2,7 @@ package ru.itschool.satgamethree;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,6 +17,7 @@ public class Main extends ApplicationAdapter {
     Vector3 touch;
 
     Texture image;
+    Sound sound;
     Ghost[] ghost = new Ghost[33];
 
     @Override
@@ -25,6 +27,7 @@ public class Main extends ApplicationAdapter {
         camera.setToOrtho(false, screenWidth, screenHeight);
         touch = new Vector3();
         image = new Texture("ghost.png");
+        sound = Gdx.audio.newSound(Gdx.files.internal("man_death_01.ogg"));
         for (int i = 0; i < ghost.length; i++) {
             ghost[i] = new Ghost();
         }
@@ -38,7 +41,9 @@ public class Main extends ApplicationAdapter {
             camera.unproject(touch);
 
             for(int i=0; i<ghost.length; i++) {
-                ghost[i].hit(touch.x, touch.y);
+                if(ghost[i].hit(touch.x, touch.y)){
+                    sound.play();
+                }
             }
         }
 
@@ -61,5 +66,6 @@ public class Main extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         image.dispose();
+        sound.dispose();
     }
 }

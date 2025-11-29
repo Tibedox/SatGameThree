@@ -49,11 +49,13 @@ public class Ghost {
         }
     }
 
-    void hit(float tx, float ty){
+    boolean hit(float tx, float ty){
         if(x < tx && tx < x+width && y < ty && ty < y+height){
             x = -10000;
             stepX = 0;
             stepY = 0;
+            return true;
         }
+        return false;
     }
 }
